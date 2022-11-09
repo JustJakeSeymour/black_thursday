@@ -49,17 +49,17 @@ RSpec.describe SalesAnalyst do
     expect(sales_analyst.average_average_price_per_merchant.class).to eq(BigDecimal)
   end
   
-  it 'can return an average price for all items' do
+  it 'can return an average price for all items' do #this is a helper method we made; getting a BigDecimal
     expect(sales_analyst.average_price_for_all_items).to eq(25105.51)
-    expect(sales_analyst.average_price_for_all_items.class).to eq(Float)
+    expect(sales_analyst.average_price_for_all_items.class).to eq(BigDecimal)
   end
   
-  xit 'can return a standard deviation for all items' do #getting a different number here!
-    expect(sales_analyst.average_standard_deviation_for_all_items).to eq(290099.0)
+  it 'can return a standard deviation for all items' do #this is a helper method we made; correct now
+    expect(sales_analyst.average_standard_deviation_for_all_items).to eq(2900.99)
     expect(sales_analyst.average_standard_deviation_for_all_items.class).to eq(Float)
   end
 
-  xit 'can return items that are two standard deviations ABOVE the average ITEM price (golden items)' do #related to above
+  it 'can return items that are two standard deviations ABOVE the average ITEM price (golden items)' do #related to above
     expect(sales_analyst.golden_items.length).to eq(5)
     expect(sales_analyst.golden_items.first.class).to eq(Item)
   end
@@ -80,12 +80,12 @@ RSpec.describe SalesAnalyst do
     expect(sales_analyst.average_invoices_per_merchant_standard_deviation.class).to eq(Float)
   end
   
-  xit 'can return the merchant with the highest invoice count' do # this is taking a very long time.
+  it 'can return the merchant with the highest invoice count' do # this is taking a very long time.
     expect(sales_analyst.top_merchants_by_invoice_count.length).to eq(12)
     expect(sales_analyst.top_merchants_by_invoice_count.first.class).to eq(Merchant)
   end
   
-  xit 'can return the merchant with the lowest invoice count' do # also long time, probably same thing
+  it 'can return the merchant with the lowest invoice count' do # also long time, probably same thing
     expect(sales_analyst.bottom_merchants_by_invoice_count.length).to eq(4)
     expect(sales_analyst.bottom_merchants_by_invoice_count.first.class).to eq(Merchant)
   end
@@ -103,7 +103,7 @@ RSpec.describe SalesAnalyst do
     expect(sales_analyst.average_invoice_standard_deviation).to eq(18.07)
   end
 
-  it 'can return the day with the highest invoice count' do
+  it 'can return the day with the highest invoice count' do # oddly failed now
     expect(sales_analyst.top_days_by_invoice_count.length).to eq(1)
     expect(sales_analyst.top_days_by_invoice_count.first).to eq("Wednesday")
     expect(sales_analyst.top_days_by_invoice_count.first.class).to eq(String)
@@ -188,7 +188,7 @@ RSpec.describe SalesAnalyst do
       expect(sales_analyst.merchants_with_only_one_item.first.class).to eq(Merchant)
     end
 
-    xit 'can return merchants with only one invoice for a given month' do # to be revised
+    it 'can return merchants with only one invoice for a given month' do # to be revised
       expect(sales_analyst.merchants_with_only_one_item_registered_in_month("March").length).to eq(21)
       expect(sales_analyst.merchants_with_only_one_item_registered_in_month("March").first.class).to eq(Merchant)
 
