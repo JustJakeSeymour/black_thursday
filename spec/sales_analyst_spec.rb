@@ -1,5 +1,6 @@
 require './lib/requirements'
 
+
 RSpec.describe SalesAnalyst do
   let!(:sales_engine) {SalesEngine.from_csv({
     :items     => "./data/items.csv",
@@ -55,7 +56,7 @@ RSpec.describe SalesAnalyst do
   end
   
   it 'can return a standard deviation for all items' do #this is a helper method we made; correct now
-    expect(sales_analyst.average_standard_deviation_for_all_items).to eq(2900.99)
+    expect(sales_analyst.average_standard_deviation_for_all_items).to eq(25032.22)
     expect(sales_analyst.average_standard_deviation_for_all_items.class).to eq(Float)
   end
 

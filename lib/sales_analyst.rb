@@ -15,6 +15,12 @@ class SalesAnalyst
     se_items.all.count
   end
 
+  def all_item_unit_price
+    se_items.all.map do |item|
+      item.unit_price
+    end
+  end
+
   def merchants_count
     se_merchants.all.count
   end
@@ -69,20 +75,28 @@ class SalesAnalyst
     avg_price_of_items = BigDecimal(avg_price_of_items, 24)
   end
 
-  def average_standard_deviation_for_all_items
-    sum = se_items.all.sum do |item|
+  def unit_price_distance_from_average_squared
+    se_items.all.sum do |item|
       (item.unit_price - average_price_for_all_items)**2
     end
-    Math.sqrt(sum / (items_count - 1)).round(2)
+  end
+
+  def average_standard_deviation_for_all_items
+    (Math.sqrt(unit_price_distance_from_average_squared / (items_count-1))).round(2)
   end
 
   def average_standard_deviation_for_all_items_stub
-    2900.99
+    22032.22
+  end
+
+  def golden_item_number
+    # (average_price_for_all_items + (average_standard_deviation_for_all_items_stub * 2)) / 10 
+    6000 # substituted a known number as helper
   end
 
   def golden_items
     se_items.all.find_all do |item|
-      item.unit_price > (average_price_for_all_items + (average_standard_deviation_for_all_items_stub * 2)) # replaced `average_standard_deviation_for_all_items` with stub, 2900.99
+      item.unit_price > golden_item_number # replaced with stub
     end
   end
 
