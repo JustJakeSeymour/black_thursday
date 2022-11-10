@@ -8,7 +8,7 @@ class Merchant
   def initialize(info, repo)
     @id = info[:id].to_i
     @name = info[:name]
-    @created_at = Time.parse(info[:created_at])
+    @created_at = Time.parse(info[:created_at]) if !info[:created_at].nil?
     @repo = repo
   end
   
